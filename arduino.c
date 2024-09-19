@@ -1,3 +1,6 @@
+const int outputPin = 13;  // Пін для виводу сигналу Морзе
+String message = "привіт";  // Повідомлення для закодування
+
 String morseTable[] = {
   ".-", "-...", ".--", "-..", ".", "..-.", "--.", "....", "..", ".---", "-.-", ".-..", 
   "--", "-.", "---", ".--.", "--.-", ".-.", "...", "-", "..-", "..-.", "...-", ".--", "-..-", "-.--", "--..", ".-.-", "-.-.", "---.", "--..", "..-..", "......", "..--..", "-.-.--", "-..-.", "-.--.", "-.--.-"
@@ -9,16 +12,14 @@ char ukrainianChars[] = {
 
 void setup() {
   Serial.begin(9600);  // Початок серійної передачі даних
-  pinMode(13, OUTPUT); // Налаштування пін 13 як вихід для передачі Морзе
+  pinMode(outputPin, OUTPUT); // Налаштування піну як вихід для передачі Морзе
 }
 
 void loop() {
-  String message = "привіт";  // Повідомлення для закодування
-
   String morseCode = encodeToMorse(message);
   Serial.println("Закодоване повідомлення в Морзе: " + morseCode);
   
-  // Відправка повідомлення через пін 13
+  // Відправка повідомлення через заданий пін
   sendMorse(morseCode);
   
   delay(10000);  // Очікування 10 секунд перед наступним повідомленням
@@ -28,7 +29,6 @@ void loop() {
 String encodeToMorse(String text) {
   String morse = "";
   int charCount = sizeof(ukrainianChars) / sizeof(ukrainianChars[0]);
-
   for (int i = 0; i < text.length(); i++) {
     char c = text[i];
     for (int j = 0; j < charCount; j++) {
@@ -39,7 +39,6 @@ String encodeToMorse(String text) {
       }
     }
   }
-
   return morse;
 }
 
@@ -47,14 +46,14 @@ String encodeToMorse(String text) {
 void sendMorse(String morseCode) {
   for (int i = 0; i < morseCode.length(); i++) {
     if (morseCode[i] == '.') {
-      digitalWrite(13, HIGH);
+      digitalWrite(outputPin, HIGH);
       delay(200);  // Тривалість короткого сигналу
-      digitalWrite(13, LOW);
+      digitalWrite(outputPin, LOW);
       delay(200);  // Пауза між сигналами
     } else if (morseCode[i] == '-') {
-      digitalWrite(13, HIGH);
+      digitalWrite(outputPin, HIGH);
       delay(600);  // Тривалість довгого сигналу
-      digitalWrite(13, LOW);
+      digitalWrite(outputPin, LOW);
       delay(200);
     } else if (morseCode[i] == ' ') {
       delay(600);  // Пауза між літерами
